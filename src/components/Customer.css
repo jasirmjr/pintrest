@@ -1,0 +1,133 @@
+.customer-section {
+  padding: 100px 0 100px 8%; /* Leave right padding open for trailing cards look */
+  background-color: #fbf9f6;
+  overflow: hidden; /* Crucial: hides extra reviews extending past the window border */
+}
+
+.customer-headline {
+  font-size: 42px;
+  text-align: center;
+  font-weight: 700;
+  margin-bottom: 60px;
+  padding-right: 8%; /* Balances center position relative to page grid */
+  opacity: 0;
+  transform: translateY(-30px);
+  transition: opacity 0.8s ease, transform 0.8s cubic-bezier(0.25, 1, 0.5, 1);
+}
+
+.slider-container, .slider-controls {
+  /* Start shrunken down and invisible */
+  opacity: 0;
+  transform: scale(0.95) translateY(40px);
+  transition: opacity 1s cubic-bezier(0.34, 1.56, 0.64, 1), transform 1s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+/* --- Active Pop-up States (Triggered by Scroll) --- */
+.customer-section.is-visible .customer-headline {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.customer-section.is-visible .slider-container,
+.customer-section.is-visible .slider-controls {
+  opacity: 1;
+  transform: scale(1) translateY(0);
+  transition-delay: 0.15s; /* Staggered delay for the pop action */
+}
+
+
+
+.customer-headline .dot {
+  color: #84b47c;
+}
+
+/* Slider Track Architecture */
+.slider-container {
+  width: 100%;
+  overflow: visible; /* Allows trailing cards to look seamlessly partially visible */
+}
+
+.slider-track {
+  display: flex;
+  gap: 30px;
+  transition: transform 0.6s cubic-bezier(0.25, 1, 0.5, 1); /* Premium fluid sliding transition */
+}
+
+/* Review Cards Layout */
+.review-card {
+  min-width: 300px;
+  max-width: 300px;
+  background-color: white;
+  border-radius: 16px;
+  padding: 35px 30px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.015);
+  min-height: 240px;
+}
+
+.review-text {
+  font-size: 15px;
+  line-height: 1.6;
+  color: #444;
+}
+
+/* Profile Section inside Card */
+.user-profile {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  margin-top: 25px;
+}
+
+.user-avatar {
+  width: 45px;
+  height: 45px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.user-meta h4 {
+  font-size: 15px;
+  font-weight: 600;
+  color: #111;
+  margin-bottom: 2px;
+}
+
+.user-meta span {
+  font-size: 13px;
+  color: #84b47c; /* Theme green matching metadata text from image */
+  font-weight: 500;
+}
+
+/* Control Buttons Style Layout */
+.slider-controls {
+  display: flex;
+  justify-content: center;
+  gap: 25px;
+  margin-top: 50px;
+  padding-right: 8%;
+}
+
+.control-btn {
+  background: none;
+  border: none;
+  font-size: 24px;
+  color: #111;
+  cursor: pointer;
+  padding: 10px;
+  transition: all 0.2s ease;
+  user-select: none;
+}
+
+.control-btn:hover:not(.disabled) {
+  color: #84b47c;
+  transform: scale(1.2);
+}
+
+.control-btn.disabled {
+  color: #ccc;
+  cursor: not-allowed;
+  opacity: 0.5;
+}

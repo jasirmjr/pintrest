@@ -1,0 +1,156 @@
+.main-footer {
+  background-color: #fbf9f6;
+  padding: 80px 8% 40px 8%;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Upper Grid Framework */
+.footer-top {
+  display: grid;
+  grid-template-columns: 1fr 1.5fr 1.5fr;
+  gap: 40px;
+  align-items: flex-start;
+  margin-bottom: 60px;
+}
+
+.footer-logo {
+  font-size: 26px;
+  font-weight: 700;
+  color: #111;
+}
+
+.footer-logo .dot {
+  color: #84b47c;
+}
+
+/* Dual Column Navigation Grid */
+.footer-links-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 20px 40px;
+  list-style: none;
+  padding: 0;
+}
+
+.footer-links-grid a {
+  font-size: 15px;
+  font-weight: 500;
+  color: #444;
+  transition: color 0.2s ease;
+}
+
+.footer-links-grid a:hover {
+  color: #84b47c;
+}
+
+/* Newsletter Input Layout Box */
+.newsletter-col h3 {
+  font-size: 16px;
+  font-weight: 600;
+  margin-bottom: 15px;
+  color: #111;
+  text-align: left;
+}
+
+.newsletter-box {
+  display: flex;
+  align-items: center;
+  border: 1px solid #ddd;
+  background-color: white;
+  border-radius: 4px; /* Matches crisp, minimal look */
+  overflow: hidden;
+  max-width: 340px;
+}
+
+.newsletter-box input {
+  border: none;
+  padding: 14px 18px;
+  width: 100%;
+  outline: none;
+  font-size: 14px;
+}
+
+.newsletter-go {
+  background-color: #84b47c;
+  color: white;
+  border: none;
+  padding: 14px 24px;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.newsletter-go:hover {
+  background-color: #6c9a65;
+}
+
+/* Structural Separation Line */
+.footer-divider {
+  border: none;
+  border-top: 1px solid #eee;
+  margin-bottom: 30px;
+}
+
+/* Lower Row Baseline Frame */
+.footer-bottom {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 20px;
+}
+
+.copyright-info {
+  font-size: 14px;
+  color: #666;
+  font-weight: 500;
+}
+
+.copyright-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 22px;
+  height: 22px;
+  border: 1.5px solid #111;
+  border-radius: 50%;
+  font-size: 11px;
+  font-weight: 700;
+  margin-right: 4px;
+}
+
+/* Circular Social Icons styling */
+.footer-socials {
+  display: flex;
+  gap: 15px;
+}
+
+.social-circle {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background-color: white;
+  border: 1px solid #eee;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 14px;
+  font-weight: 500;
+  color: #444;
+  transition: all 0.3s ease;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.01);
+}
+
+.social-circle:hover {
+  background-color: #1a1924;
+  color: white;
+  border-color: #1a1924;
+  transform: translateY(-3px);
+}
+
+.social-circle.bē {
+  font-size: 12px;
+  font-weight: 700;
+}

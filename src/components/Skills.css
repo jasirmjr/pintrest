@@ -1,0 +1,184 @@
+.skills-section {
+  padding: 100px 8%;
+  background-color: #fbf9f6;
+}
+
+/* Header Grid Row alignment */
+.skills-header {
+  display: grid;
+  grid-template-columns: 1.2fr 1fr;
+  gap: 60px;
+  align-items: flex-end;
+  margin-bottom: 60px;
+}
+
+.skills-headline {
+  font-size: 42px;
+  line-height: 1.2;
+  font-weight: 700;
+  color: #111;
+  /* Initial hidden state: pushed to the left */
+  opacity: 0;
+  transform: translateX(-50px);
+  transition: opacity 1s cubic-bezier(0.25, 1, 0.5, 1), transform 1s cubic-bezier(0.25, 1, 0.5, 1);
+}
+
+.skills-subtext {
+  font-size: 16px;
+  line-height: 1.6;
+  color: #555;
+  padding-bottom: 10px;
+  opacity: 0;
+  transform: translateX(50px);
+  transition: opacity 1s cubic-bezier(0.25, 1, 0.5, 1), transform 1s cubic-bezier(0.25, 1, 0.5, 1);
+}
+
+/* --- Active States (Fires when .animate-in class is attached) --- */
+.skills-header.animate-in .skills-headline {
+  opacity: 1;
+  transform: translateX(0); /* Glides smoothly to its true center from the left */
+}
+
+.skills-header.animate-in .skills-subtext {
+  opacity: 1;
+  transform: translateX(0); /* Glides smoothly to its true center from the right */
+  transition-delay: 0.15s;   /* Tiny cinematic layout delay after the title drops */
+}
+
+/* Body Split Framework */
+.skills-body {
+  display: grid;
+  grid-template-columns: 1fr 1.3fr;
+  gap: 60px;
+  align-items: center;
+  /* Initial state: Hidden and floated upward */
+  opacity: 0;
+  transform: translateY(-40px);
+  transition: 
+    opacity 1s cubic-bezier(0.25, 1, 0.5, 1), 
+    transform 1s cubic-bezier(0.25, 1, 0.5, 1);
+}
+
+/* --- Active Dropdown Trigger State --- */
+.skills-body.animate-drop {
+  opacity: 1;
+  transform: translateY(0); /* Drops smoothly down to its original baseline positioning */
+}
+
+/* Timeline Layout Construction */
+.skills-timeline {
+  display: flex;
+  flex-direction: column;
+  gap: 35px;
+}
+
+.timeline-item {
+  display: flex;
+  gap: 25px;
+}
+
+.icon-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: relative;
+}
+
+.step-icon {
+  width: 50px;
+  height: 50px;
+  background-color: white;
+  border: 1px solid #eee;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 20px;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.02);
+  z-index: 2;
+}
+
+.timeline-line {
+  width: 2px;
+  background-image: linear-gradient(to bottom, #ccc 50%, rgba(255,255,255,0) 0%);
+  background-position: right;
+  background-size: 2px 8px; /* Beautiful dashed dot pattern matching your reference photo */
+  background-repeat: repeat-y;
+  flex-grow: 1;
+  position: absolute;
+  top: 50px;
+  bottom: -40px;
+}
+
+.timeline-content h3 {
+  font-size: 20px;
+  font-weight: 600;
+  margin-bottom: 6px;
+}
+
+.timeline-content p {
+  font-size: 14px;
+  color: #666;
+  line-height: 1.5;
+}
+
+/* Media Block with floating badge setup */
+.skills-media-wrapper {
+  position: relative;
+  width: 100%;
+}
+
+.video-container {
+  width: 100%;
+  border-radius: 28px;
+  overflow: hidden;
+  box-shadow: 0 15px 35px rgba(0,0,0,0.06);
+}
+
+.skills-video {
+  width: 100%;
+  display: block;
+  object-fit: cover;
+  aspect-ratio: 16 / 10;
+}
+
+/* Floating Statistics Badge */
+.metrics-badge {
+  position: absolute;
+  top: -30px;
+  right: 40px;
+  background-color: #84b47c;
+  color: white;
+  display: flex;
+  align-items: center;
+  padding: 20px 35px;
+  border-radius: 4px; /* Crisp minimal corners */
+  gap: 25px;
+  z-index: 10;
+  box-shadow: 0 10px 25px rgba(132, 180, 124, 0.25);
+}
+
+.metric-box {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.metric-num {
+  font-size: 38px;
+  font-weight: 700;
+  line-height: 1;
+}
+
+.metric-label {
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+  line-height: 1.3;
+}
+
+.metric-divider {
+  width: 1px;
+  height: 35px;
+  background-color: rgba(255, 255, 255, 0.3);
+}

@@ -1,0 +1,59 @@
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 24px 8%;
+  
+  /* --- Add these lines to fix the Navbar to the top --- */
+  position: fixed;      /* Pins the bar relative to the browser window */
+  top: 0;               /* Anchors it to the absolute top edge */
+  left: 0;              /* Anchors it to the left edge */
+  width: 100%;          /* Ensures it spans across the entire screen width */
+  z-index: 1000;        /* Places it on top of all other elements (like cards and text) */
+  
+  /* Optional background tweak */
+  background-color: rgba(251, 249, 246, 0.95); /* Semi-transparent background matching your site color */
+  backdrop-filter: blur(8px);                 /* Gives it a modern premium frosted glass effect */
+  box-shadow: 0 2px 20px rgba(0, 0, 0, 0.02);  /* Subtle bottom line separator */
+  
+  box-sizing: border-box; /* Prevents padding from breaking the 100% width layout */
+}
+.logo {
+  font-size: 24px;
+  font-weight: 700;
+}
+.logo .dot { color: #84b47c; }
+.nav-links {
+  display: flex;
+  list-style: none;
+  gap: 32px;
+}
+.nav-links a {
+  font-size: 15px;
+  font-weight: 500;
+  color: #777;                     /* Slightly muted by default */
+  transition: all 0.2s ease;
+  padding-bottom: 4px;
+  border-bottom: 2px solid transparent; 
+}
+.nav-links a:hover { color: #000; }
+.nav-auth {
+  display: flex;
+  align-items: center;
+  gap: 24px;
+}
+.login-btn { font-weight: 500; }
+.trial-btn {
+  background-color: #1a1924;
+  color: #fff !important;
+  padding: 10px 24px;
+  border-radius: 20px;
+  font-weight: 500;
+}
+
+/* This is the new rule that highlights the text and matches your site's color scheme */
+.nav-links a.active {
+  color: #000;                     /* Snaps to full dark bold focus */
+  border-bottom: 2px solid #84b47c; /* A clean green underscore beneath the active link */
+  font-weight: 600;
+}

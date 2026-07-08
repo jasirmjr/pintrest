@@ -1,0 +1,137 @@
+.categories-section {
+  padding: 140px 8% 80px 8%; 
+  text-align: center;
+  background-color: #fbf9f6;
+}
+
+.categories-headline {
+  font-size: 36px;
+  font-weight: 600;
+  margin-bottom: 35px;
+  color: #111;
+}
+
+.categories-tabs {
+  display: flex;
+  justify-content: center;
+  gap: 30px;
+  margin-bottom: 35px;
+  flex-wrap: wrap;
+}
+
+.category-tab {
+  font-size: 15px;
+  color: #777;
+  cursor: pointer;
+  padding-bottom: 6px;
+  transition: all 0.2s ease;
+  font-weight: 500;
+}
+
+.category-tab:hover, .category-tab.active {
+  color: #000;
+  border-bottom: 2px solid #000;
+}
+
+/* --- The Grid Container --- */
+.categories-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 30px;
+  margin-top: 0px;
+  padding-top: 20px;
+}
+
+/* --- Bolder Base State --- */
+.category-card {
+  text-align: left;
+  display: flex;
+  flex-direction: column;
+  
+  opacity: 0;
+  transform: translateY(50px) scale(0.9);
+  
+  /* Use a premium custom bezier curve for the entrance hook */
+  transition: 
+    opacity 0.8s cubic-bezier(0.215, 0.610, 0.355, 1),
+    transform 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.15); /* Adds a crisp spring bounce */
+}
+
+/* --- Active State (Triggered on Scroll Match) --- */
+.categories-grid.is-visible .category-card {
+  opacity: 1;
+  transform: translateY(0) scale(1);
+}
+
+/* --- Polished, Staggered Delays --- */
+.categories-grid.is-visible .category-card:nth-child(1) { transition-delay: 0.1s; }
+.categories-grid.is-visible .category-card:nth-child(2) { transition-delay: 0.2s; }
+.categories-grid.is-visible .category-card:nth-child(3) { transition-delay: 0.3s; }
+.categories-grid.is-visible .category-card:nth-child(4) { transition-delay: 0.4s; }
+
+/* Image and Card styles */
+.card-image-box {
+  width: 100%;
+  aspect-ratio: 1 / 1;
+  border-radius: 24px;
+  background-size: cover;
+  background-position: center;
+  margin-bottom: 15px;
+  transition: transform 0.3s ease;
+}
+
+.category-card:hover .card-image-box {
+  transform: translateY(-5px);
+}
+
+.card-details h3 {
+  font-size: 18px;
+  font-weight: 600;
+  margin-bottom: 4px;
+}
+
+.card-details p {
+  font-size: 13px;
+  color: #777;
+}
+
+/* ==========================================================================
+   ✨ LUXURY HOVER EFFECTS (When mouse rests on a card)
+   ========================================================================== */
+
+/* 1. Lift and slightly tilt the card element */
+.category-card {
+  cursor: pointer;
+  transition: transform 0.4s cubic-bezier(0.25, 1, 0.5, 1);
+}
+
+/* 2. Scale, lift, and add a soft ambient colored glow to the image box */
+.card-image-box {
+  width: 100%;
+  aspect-ratio: 1 / 1;
+  border-radius: 24px;
+  background-size: cover;
+  background-position: center;
+  margin-bottom: 15px;
+  
+  /* Smooth transition wrapper for interactive hovers */
+  transition: transform 0.5s cubic-bezier(0.25, 1, 0.5, 1), box-shadow 0.5s ease;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.02);
+}
+
+.category-card:hover .card-image-box {
+  transform: translateY(-8px) scale(1.02); /* Smooth, elegant floating lift */
+  box-shadow: 0 20px 35px rgba(132, 180, 124, 0.15); /* Soft premium green shadow matching your theme */
+}
+
+/* 3. Subtle color shift for the title text on hover */
+.card-details h3 {
+  font-size: 18px;
+  font-weight: 600;
+  margin-bottom: 4px;
+  transition: color 0.3s ease;
+}
+
+.category-card:hover .card-details h3 {
+  color: #84b47c; /* Text turns your signature theme green smoothly */
+}
