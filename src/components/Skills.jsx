@@ -1,15 +1,34 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import './Skills.css';
 
 export default function Skills() {
+  const [videoUrl, setVideoUrl] = useState('');
   const [headerVisible, setHeaderVisible] = useState(false);
   const [bodyVisible, setBodyVisible] = useState(false);
 
   const headerRef = useRef(null);
   const bodyRef = useRef(null);
 
+  // 1. Fetch the custom uploaded video asset on load
   useEffect(() => {
-    // 1. Observer for the Header
+    const fetchVideo = async () => {
+      try {
+        const response = await fetch('http://localhost:5000/api/admin/video');
+        if (response.ok) {
+          const data = await response.json();
+          if (data && data.videoUrl) {
+            setVideoUrl(`http://localhost:5000${data.videoUrl}`);
+          }
+        }
+      } catch (err) {
+        console.error("Could not fetch uploaded video from backend server:", err);
+      }
+    };
+    fetchVideo();
+  }, []);
+
+  // 2. Scroll Intersection Observers for entrance animations
+  useEffect(() => {
     const headerObserver = new IntersectionObserver(
       ([entry]) => {
         if (entry.isIntersecting) {
@@ -23,7 +42,6 @@ export default function Skills() {
       { threshold: 0.1 }
     );
 
-    // 2. Observer for the Main Body layout
     const bodyObserver = new IntersectionObserver(
       ([entry]) => {
         if (entry.isIntersecting) {
@@ -34,7 +52,7 @@ export default function Skills() {
           }
         }
       },
-      { threshold: 0.05 } // Sensitive trigger as soon as the body peeks from the bottom
+      { threshold: 0.05 }
     );
 
     if (headerRef.current) headerObserver.observe(headerRef.current);
@@ -52,8 +70,12 @@ export default function Skills() {
     { id: 3, title: 'Flexibility', desc: 'The ability to switch is an important skill', icon: '⚡' }
   ];
 
+  // Default fallback video URL if your database collection is brand new/empty
+  const defaultVideo = "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4";
+
   return (
     <section id="skills" className="skills-section">
+      {/* Header Container with Horizontal Slide Animation */}
       <div 
         className={`skills-header ${headerVisible ? 'animate-in' : ''}`} 
         ref={headerRef}
@@ -66,12 +88,12 @@ export default function Skills() {
         </p>
       </div>
 
-      {/* Connected dynamic className mapping to the body visibility state */}
+      {/* Main Grid Container with Vertical Dropdown Animation */}
       <div 
         className={`skills-body ${bodyVisible ? 'animate-drop' : ''}`} 
         ref={bodyRef}
       >
-        {/* Left Side: Staggered Timeline Row */}
+        {/* Left Side Column: Timeline Checklist */}
         <div className="skills-timeline">
           {steps.map((step, index) => (
             <div key={step.id} className="timeline-item">
@@ -87,7 +109,7 @@ export default function Skills() {
           ))}
         </div>
 
-        {/* Right Side: Embedded Video Player + Green Status Badge */}
+        {/* Right Side Column: Media Player Frame + Statistics Badge */}
         <div className="skills-media-wrapper">
           <div className="metrics-badge">
             <div className="metric-box">
@@ -103,10 +125,14 @@ export default function Skills() {
 
           <div className="video-container">
             <video 
-              src="https://www.w3schools.com/html/mov_bbb.mp4" 
+              src={videoUrl || defaultVideo} 
+              autoPlay
+              muted
+              loop
+              playsInline
               controls
-              poster="https://images.unsplash.com/photo-1522202176988-66273c2fd55f?q=80&w=800"
               className="skills-video"
+              style={{ width: '100%', height: '100%', objectFit: 'cover' }} // Fixed: modern objectFit layout syntax
             />
           </div>
         </div>

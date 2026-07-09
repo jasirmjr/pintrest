@@ -1,65 +1,98 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import './Categories.css';
 
 export default function Categories() {
-  const [isVisible, setIsVisible] = useState(false);
-  const sectionRef = useRef(null);
+  const [categories, setCategories] = useState([]);
+  const [isGridVisible, setIsGridVisible] = useState(false);
+  const gridRef = useRef(null);
 
+  // Fetch from local Node server on page load
+  useEffect(() => {
+    const loadCategories = async () => {
+      try {
+        const response = await fetch('http://localhost:5000/api/categories');
+        if (response.ok) {
+          const data = await response.json();
+          setCategories(data);
+        }
+      } catch (err) {
+        console.error("Could not fetch categories from backend server:", err);
+      }
+    };
+    loadCategories();
+  }, []);
+
+  // Intersection Observer to trigger entrance animation every time the section is reached
   useEffect(() => {
     const observer = new IntersectionObserver(
       ([entry]) => {
         if (entry.isIntersecting) {
-          setIsVisible(true); // Triggers animation going down
+          setIsGridVisible(true);
         } else {
-          // If you scroll back UP above the section, hide cards instantly so they can re-animate
-          if (window.scrollY < (sectionRef.current?.offsetTop || 0) - 150) {
-            setIsVisible(false);
+          // Resets the state when scrolling completely away back to the top
+          if (window.scrollY < (gridRef.current?.offsetTop || 0) - window.innerHeight) {
+            setIsGridVisible(false);
           }
         }
       },
-      { 
-        threshold: 0.05,
-        rootMargin: "0px 0px -30px 0px"
-      }
+      { threshold: 0.05 } // Triggers early as soon as the top of the grid pops up
     );
 
-    if (sectionRef.current) {
-      observer.observe(sectionRef.current);
+    if (gridRef.current) {
+      observer.observe(gridRef.current);
     }
 
     return () => observer.disconnect();
   }, []);
 
-  const categoryData = [
-    { id: 1, title: 'Sales Marketing', duration: '4 month', img: 'https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?q=80&w=500' },
-    { id: 2, title: 'Data analytics', duration: '3 month', img: 'https://images.unsplash.com/photo-1618005198143-e5283b519a7f?q=80&w=500' },
-    { id: 3, title: 'Copywriting Pro', duration: '2 month', img: 'https://images.unsplash.com/photo-1516414447565-b14be0adf13e?q=80&w=500' },
-    { id: 4, title: 'Design art', duration: '4 month', img: 'https://images.unsplash.com/photo-1634017839464-5c339ebe3cb4?q=80&w=500' }
+  const displayItems = categories.length > 0 ? categories : [
+    { _id: '1', title: 'Sales Marketing', duration: '4 month', img: 'https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?q=80&w=400' },
+    { _id: '2', title: 'Data analytics', duration: '3 month', img: '' },
+    { _id: '3', title: 'Copywriting Pro', duration: '2 month', img: 'https://images.unsplash.com/photo-1516321318423-f06f85e504b3?q=80&w=400' },
+    { _id: '4', title: 'Design art', duration: '4 month', img: 'https://images.unsplash.com/photo-1541701494587-cb58502866ab?q=80&w=400' }
   ];
 
-  const categoryTabs = ['Entertainment', 'Lifestyle', 'Writing', 'Business', 'Food'];
-
   return (
-    <section id="categories" className="categories-section" ref={sectionRef}>
-      <h2 className="categories-headline">Unlimited access to 100+ instructors.</h2>
+    <section id="categories" className="categories-section">
+      <h2 className="section-title">Unlimited access to 100+ instructors.</h2>
       
-      <div className="categories-tabs">
-        <span className="category-tab active">All categories</span>
-        {categoryTabs.map((tab, index) => (
-          <span key={index} className="category-tab">{tab}</span>
-        ))}
+      <div className="filter-tabs">
+        <span className="tab active">All categories</span>
+        <span className="tab">Entertainment</span>
+        <span className="tab">Lifestyle</span>
+        <span className="tab">Writing</span>
+        <span className="tab">Business</span>
+        <span className="tab">Food</span>
       </div>
 
-      <div className={`categories-grid ${isVisible ? 'is-visible' : ''}`}>
-        {categoryData.map((item) => (
-          <div key={item.id} className="category-card">
-            <div className="card-image-box" style={{ backgroundImage: `url(${item.img})` }} />
-            <div className="card-details">
-              <h3>{item.title}</h3>
-              <p>{item.duration}</p>
+      {/* Dynamic class wrapper linked to scroll trigger state */}
+      <div 
+        className={`categories-grid ${isGridVisible ? 'animate-visible' : ''}`} 
+        ref={gridRef}
+      >
+        {displayItems.map((item, index) => {
+          const imageSrc = item.img && item.img.startsWith('/uploads') 
+            ? `http://localhost:5000${item.img}` 
+            : item.img;
+
+          return (
+            <div 
+              key={item._id} 
+              className="category-card"
+              style={{ '--card-index': index }} // Custom inline CSS variable to handle the sequential stagger delay
+            >
+              <div className="image-container">
+                {imageSrc ? (
+                  <img src={imageSrc} alt={item.title} className="category-img" />
+                ) : (
+                  <div className="fallback-empty-bg"></div>
+                )}
+              </div>
+              <h3 className="category-card-title">{item.title}</h3>
+              <p className="category-card-duration">{item.duration}</p>
             </div>
-          </div>
-        ))}
+          );
+        })}
       </div>
     </section>
   );

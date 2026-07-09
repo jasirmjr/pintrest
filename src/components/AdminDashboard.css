@@ -1,0 +1,240 @@
+/* --- Dashboard Layout Shell --- */
+.dashboard-container {
+  display: flex;
+  min-height: 100vh;
+  background-color: #f8f6f2;
+  font-family: system-ui, -apple-system, sans-serif;
+}
+
+/* --- Left Sidebar Navigation --- */
+.dashboard-sidebar {
+  width: 260px;
+  background-color: #1a1924; /* Dark elegant theme background */
+  color: #fff;
+  padding: 35px 25px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  box-shadow: 4px 0 15px rgba(0, 0, 0, 0.05);
+}
+
+.sidebar-brand {
+  font-size: 24px;
+  font-weight: 700;
+  margin-bottom: 50px;
+}
+
+.sidebar-brand .dot {
+  color: #84b47c;
+}
+
+.sidebar-menu {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  flex-grow: 1;
+}
+
+.menu-item {
+  padding: 14px 18px;
+  border-radius: 8px;
+  margin-bottom: 8px;
+  color: #b3b2bb;
+  cursor: pointer;
+  font-weight: 500;
+  font-size: 15px;
+  transition: all 0.2s ease;
+}
+
+.menu-item:hover, .menu-item.active {
+  background-color: rgba(255, 255, 255, 0.08);
+  color: #fff;
+}
+
+.menu-item.active {
+  border-left: 4px solid #84b47c;
+  border-radius: 0 8px 8px 0;
+  padding-left: 14px;
+}
+
+.logout-btn {
+  background-color: #ec5959;
+  color: white;
+  border: none;
+  padding: 12px;
+  border-radius: 8px;
+  font-weight: 600;
+  font-size: 14px;
+  cursor: pointer;
+  transition: background-color 0.2s;
+  width: 100%;
+}
+
+.logout-btn:hover {
+  background-color: #d44747;
+}
+
+/* --- Right Main Content Area --- */
+.dashboard-content {
+  flex-grow: 1;
+  padding: 40px 50px;
+  overflow-y: auto;
+}
+
+.content-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 40px;
+}
+
+.content-header h2 {
+  font-size: 28px;
+  font-weight: 700;
+  color: #111;
+}
+
+.admin-profile-tag {
+  background-color: white;
+  padding: 8px 16px;
+  border-radius: 20px;
+  font-size: 14px;
+  font-weight: 600;
+  color: #555;
+  border: 1px solid #e6e4e0;
+}
+
+/* --- Quick Analytics Overview Metrics Widgets --- */
+.overview-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 25px;
+  margin-bottom: 40px;
+}
+
+.metric-card {
+  background-color: white;
+  padding: 25px;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.01);
+  border: 1px solid #e6e4e0;
+}
+
+.metric-card h3 {
+  font-size: 14px;
+  color: #777;
+  font-weight: 500;
+  margin-bottom: 10px;
+}
+
+.metric-card .value {
+  font-size: 32px;
+  font-weight: 700;
+  color: #111;
+}
+
+/* --- Data Workspace Panel --- */
+.data-panel {
+  background-color: white;
+  border-radius: 12px;
+  padding: 30px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.01);
+  border: 1px solid #e6e4e0;
+}
+
+.data-panel h4 {
+  font-size: 18px;
+  font-weight: 600;
+  color: #111;
+  margin-bottom: 20px;
+}
+
+.placeholder-text {
+  color: #666;
+  font-size: 15px;
+  line-height: 1.6;
+}
+
+/* --- Categories Management Page Wrapper Split Panels --- */
+.categories-management-wrapper {
+  display: grid;
+  grid-template-columns: 1fr 1.2fr;
+  gap: 30px;
+  align-items: flex-start;
+}
+
+.dashboard-upload-form {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  margin-top: 15px;
+}
+
+.status-toast-alert {
+  background-color: #eef7ee;
+  color: #3b7a3b;
+  padding: 12px;
+  border-radius: 6px;
+  font-size: 14px;
+  font-weight: 600;
+  margin-bottom: 15px;
+}
+
+.upload-submit-btn {
+  background-color: #84b47c;
+  color: white;
+  border: none;
+  padding: 14px;
+  font-size: 14px;
+  font-weight: 600;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background-color 0.2s;
+  margin-top: 5px;
+}
+
+.upload-submit-btn:hover {
+  background-color: #6c9a65;
+}
+
+/* --- Live Feed Grid View Panel Layout styles --- */
+.admin-items-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 15px;
+  max-height: 480px;
+  overflow-y: auto;
+  padding-right: 5px;
+}
+
+.admin-preview-item-card {
+  background-color: #faf9f6;
+  border-radius: 8px;
+  overflow: hidden;
+  border: 1px solid #e9e7e2;
+  display: flex;
+  flex-direction: column;
+}
+
+.admin-preview-item-card img {
+  width: 100%;
+  height: 110px;
+  object-fit: cover;
+  background-color: #ddd;
+}
+
+.card-details {
+  padding: 12px;
+}
+
+.card-details h5 {
+  font-size: 14px;
+  font-weight: 600;
+  margin: 0 0 4px 0;
+  color: #111;
+}
+
+.card-details span {
+  font-size: 12px;
+  color: #777;
+}
